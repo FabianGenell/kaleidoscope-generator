@@ -20,7 +20,8 @@ const images = [
 export const SettingsPanel: React.FC<{
     settings: Settings;
     setSettings: Dispatch<React.SetStateAction<Settings>>;
-}> = ({ settings, setSettings }) => {
+    setShowSettings: Dispatch<React.SetStateAction<boolean>>;
+}> = ({ settings, setSettings,setShowSettings }) => {
 
     function updateNumber(e: React.ChangeEvent<HTMLInputElement>) {
         const newSettings: Settings = {...settings};
@@ -50,6 +51,7 @@ export const SettingsPanel: React.FC<{
 
     return <>
         <div className="settings">
+            <button className='hide-button' onClick={()=> setShowSettings(false)}>Hide</button>
             <header>
                 <h1>Kaleidoscope</h1>
             </header>

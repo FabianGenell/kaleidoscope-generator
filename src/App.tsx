@@ -2,6 +2,7 @@ import { useState } from 'react'
 import './App.css'
 import {SettingsPanel} from './components/SettingsPanel'
 import {Canvas} from './components/Canvas'
+import { ShowButton } from './components/ShowButton';
 
 export interface Settings {
   image_url?: string;
@@ -33,13 +34,15 @@ function App() {
       segment_throbing: false,
       segment_throbing_limit: 0.5,
       offset: 100,
-  }
-  )
+  });
+  const [showSettings, setShowSettings] = useState(true);
 
   return (
     <>
     <Canvas settings={settings}/>
-    <SettingsPanel settings={settings} setSettings={setSettings}/>
+    {showSettings ?
+     <SettingsPanel settings={settings} setSettings={setSettings} setShowSettings={setShowSettings}/>
+      : <ShowButton setShowSettings={setShowSettings}/>}
 
     </>
   )
