@@ -92,7 +92,7 @@ void main() {
     vec2 mouse = u_mouse / u_resolution;
 
     //getting the hypotenuse
-    float radius = length(uv);
+    float radius = length(uv) * ZOOM;
     radius *= mix(1.0, 2.0, mouse.x);
 
     if(THROBING) {

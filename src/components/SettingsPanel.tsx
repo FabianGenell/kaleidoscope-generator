@@ -22,24 +22,25 @@ export const SettingsPanel: React.FC<{
     setSettings: Dispatch<React.SetStateAction<Settings>>;
 }> = ({ settings, setSettings }) => {
 
-    function updateNumber(e) {
-        const newSettings = {...settings};
-
-        newSettings[e.target.name] = e.target.value;
+    function updateNumber(e: React.ChangeEvent<HTMLInputElement>) {
+        const newSettings: Settings = {...settings};
+        const name: string = e.target.name;
+        newSettings[name] = e.target.value;
         
-        // console.log(newSettings)
         setSettings(newSettings)
     }
 
-    function updateBoolean(e) {
-        const newSettings = {...settings};
-        newSettings[e.target.name] = !newSettings[e.target.name];
+    function updateBoolean(e: React.ChangeEvent<HTMLInputElement>) {
+        const newSettings: Settings = {...settings};
+        const name: string = e.target.name;
+
+        newSettings[name] = !newSettings[name];
         console.log(newSettings)
         setSettings(newSettings)
 
     }
 
-    function updateImage(e) {
+    function updateImage(e: React.ChangeEvent<HTMLSelectElement>) {
         const newSettings = {...settings};
 
         newSettings.image_url = `./img/${e.target.value}`;
