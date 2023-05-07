@@ -24,21 +24,21 @@ export const SettingsPanel: React.FC<{
 }> = ({ settings, setSettings,setShowSettings }) => {
 
     function updateNumber(e: React.ChangeEvent<HTMLInputElement>) {
-        const newSettings: Settings = {...settings};
-        const name: string = e.target.name;
-        newSettings[name] = e.target.value;
-        
-        setSettings(newSettings)
+        const name: keyof Settings = e.target.name as keyof Settings;
+        const value: number = parseFloat(e.target.value);
+        setSettings({
+            ...settings,
+            [name]: value,
+          });
     }
 
     function updateBoolean(e: React.ChangeEvent<HTMLInputElement>) {
-        const newSettings: Settings = {...settings};
-        const name: string = e.target.name;
-
-        newSettings[name] = !newSettings[name];
-        console.log(newSettings)
-        setSettings(newSettings)
-
+        const name: keyof Settings = e.target.name as keyof Settings;
+        const value = Boolean(!settings[name]);
+        setSettings({
+            ...settings,
+            [name]: value,
+          });
     }
 
     function updateImage(e: React.ChangeEvent<HTMLSelectElement>) {
@@ -49,6 +49,8 @@ export const SettingsPanel: React.FC<{
         setSettings(newSettings)
     }
 
+
+
     return <>
         <div className="settings">
             <button className='hide-button' onClick={()=> setShowSettings(false)}>Hide</button>
@@ -56,7 +58,7 @@ export const SettingsPanel: React.FC<{
                 <h1>Kaleidoscope</h1>
             </header>
             <form>
-                <div className='setting'>
+            <div className='setting'>
                     <label htmlFor="image">Image</label>
                     <select name="iamge" id="image" onChange={updateImage}>
                         {images.map((image, index) => {
