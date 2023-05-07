@@ -7,7 +7,22 @@ import { Settings } from "../App";
 //React.FC - A function component
 export const Canvas: React.FC<{ settings: Settings }> = ({ settings }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  function calcSize(canvas: HTMLCanvasElement): void {
+
+  useEffect(() => {
+    if (canvasRef.current) {
+        const sandbox = new glslCanvas(canvasRef.current);
+        calcSize(canvasRef.current);
+        const fragment = "void main() { gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0); }";
+        sandbox.load(fragment);
+    }
+  }, [canvasRef]);
+
+  return <div className="canvas-holder"><canvas ref={canvasRef} /> </div>;
+};
+
+
+
+function calcSize(canvas: HTMLCanvasElement): void {
     const width = window.innerWidth;
     const height = window.innerHeight;
     const dpi = window.devicePixelRatio;
@@ -18,17 +33,3 @@ export const Canvas: React.FC<{ settings: Settings }> = ({ settings }) => {
     canvas.style.width = size + "px";
     canvas.style.height = size + "px";
   }
-
-
-  useEffect(() => {
-    const sandbox = canvasRef.current ? new glslCanvas(canvasRef.current) : null;
-    if (sandbox) {
-        calcSize(canvasRef.current);
-      const fragment =
-        "void main() { gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0); }";
-      sandbox.load(fragment);
-    }
-  }, [canvasRef]);
-
-  return <canvas ref={canvasRef} />;
-};

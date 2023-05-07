@@ -7,6 +7,7 @@ export interface Settings {
   segments: number;
   bidirectional: boolean;
   speedmultiplier: number;
+  offset: number;
   angle: {
     timemultiplier: number;
     multiplier: number;
@@ -18,7 +19,7 @@ function App() {
 
   return (
     <>
-  <Canvas/>
+    <Canvas/>
     <SettingsPanel settings={{text: 'test'}}/>
 
     </>

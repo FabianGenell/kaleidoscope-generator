@@ -1,13 +1,8 @@
-interface Props {
-    settings: {
-        text?: string
-    };
-}
+import { Settings } from "../App"
 
-export  const SettingsPanel: React.FC<Props> = ({settings}) => {
+export  const SettingsPanel: React.FC<{settings: Settings}> = ({settings}) => {
     return <>
     <div className="settings">
-        {settings.text}
         <header>
             <h1>Kaleidoscope</h1>
             <p>This is a page about Kaleidoscopes!</p>
