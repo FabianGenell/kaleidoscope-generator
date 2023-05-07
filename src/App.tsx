@@ -32,7 +32,7 @@ function App() {
       bidirectional_segments: true,
       segment_throbing: false,
       segment_throbing_limit: 0.5,
-      offset: 0,
+      offset: 100,
   }
   )
 

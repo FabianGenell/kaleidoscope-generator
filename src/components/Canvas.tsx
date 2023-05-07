@@ -7,22 +7,28 @@ import { Settings } from "../App";
 //React.FC - A function component
 export const Canvas: React.FC<{ settings: Settings }> = ({ settings }) => {
     const [fragment, setFragment] = useState<string>(createFragment(settings));
-    const [imageState, setImageState] = useState(0);
     const canvasRef = useRef<HTMLCanvasElement>(null);
 
     useEffect(() => {
         if (canvasRef.current) {
             const sandbox = new glslCanvas(canvasRef.current);
             setFragment(createFragment(settings));
-            calcSize(canvasRef.current);
             sandbox.load(fragment);
 
+            //Calculate size of canvas
+            calcSize(canvasRef.current, settings.offset);
+            canvasRef.current.style.transform = `translate(calc(-50% - ${settings.offset}px), -50%)`;
+
+            window.addEventListener("resize", () => calcSize(canvasRef.current!, settings.offset));
+
+
+            //get image ratio and source
             const img = new Image();
             img.onload = function () {
-                sandbox.setUniform("imageRatio", this.width / this.height);
+                sandbox.setUniform("imageRatio", img.width / img.height);
             };
 
-            img.src = settings.image_url
+            img.src = settings.image_url!;
 
             sandbox.setUniform("image", img.src);
         }
@@ -35,16 +41,17 @@ export const Canvas: React.FC<{ settings: Settings }> = ({ settings }) => {
     );
 };
 
-function calcSize(canvas: HTMLCanvasElement): void {
+function calcSize(canvas: HTMLCanvasElement, offset : number): void {
     const width = window.innerWidth;
     const height = window.innerHeight;
     const dpi = window.devicePixelRatio;
 
-    const size = Math.max(width + 200, height);
+    const size = Math.max(width + (offset * 2), height);
     canvas.width = size * dpi;
     canvas.height = size * dpi;
     canvas.style.width = size + "px";
     canvas.style.height = size + "px";
+
 }
 
 function createFragment(settings: Settings): string {

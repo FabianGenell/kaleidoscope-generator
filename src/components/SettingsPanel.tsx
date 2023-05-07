@@ -110,14 +110,16 @@ export const SettingsPanel: React.FC<{
                     <label htmlFor="segment_throbing_limit">Segment throbing limit</label>
                     <input type="number" name="segment_throbing_limit" id="segment_throbing_limit" value={settings.segment_throbing_limit} onChange={updateNumber} />
                 </div>
-
-{/* 
-                <label htmlFor="offset">offset</label>
-                <input type="number" name="offset" id="offset" value={settings.offset} /> */}
+                    
+                <div className='setting'>
+                    <label htmlFor="offset">Offset</label>
+                    <input type="number" name="offset" id="offset" value={settings.offset} onChange={updateNumber} />
+                </div>
             </form>
             <nav>
-                <a href="">Github</a>
-                <a href="">Linkedin </a>
+                <a href="https://github.com/FabianGenell/" target='_blank'>Github</a>
+                <a href="https://www.linkedin.com/in/fabian-genell-0a4686246/" target='_blank'>Linkedin </a>
+                <span>Made by Fabian Genell</span>
             </nav>
         </div>
     </>

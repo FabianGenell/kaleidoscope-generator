@@ -24,22 +24,51 @@ div.settings {
   width: 320px;
   padding: 32px;
 
-  background-color: black;
+  background-color: rgba(0, 0, 0, 0.863);
   color: white;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  gap: 30px;
+}
+
+div.settings form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  flex: 1;
+}
+
+div.setting {
+  display: flex;
+  justify-content: space-between;
+}
+
+div.setting label {
+  font-size: 20px;
+}
+
+div.setting input {
+  max-width: 60px;
+  text-align: right;
 }
 
 h1 {
   font-size: 56px;
   font-style: italic;
   line-height: 1.1;
+  align-self: flex-start;
+  display: inline;
 }
 
 nav {
   display: flex;
   flex-direction: column;
+}
+
+nav span {
+  font-size: 16px;
+  opacity: .6;
 }
 
 div.canvas-holder {
@@ -55,5 +84,6 @@ div.canvas-holder canvas {
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(calc(-50% - 100px), -50%);
 }
+
+
